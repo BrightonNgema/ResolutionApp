@@ -1,0 +1,54 @@
+<head>
+  <title>resolution</title>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+          Hi! <span class="user" >{{> loginButtons}}<br /></span>
+            <h1>Monthly Resolutions</h1>
+
+
+          <label class="hide-finished">
+              <input type="checkbox" checked="{{hideFinished}}">
+                Hide checked
+          </label>
+          {{#if currentUser}}
+            <form class="new-resolution">
+                <input type="text" name="title" placeholder="A new Resolutions" required>
+                <input type="submit" value="Submit">
+            </form>
+            {{/if}}
+        </header>
+
+  <ul>
+    {{#each resolutions}}
+      {{>resolution}}
+    {{/each}}
+  </ul>
+
+  </div>
+
+</body>
+
+<template name="resolution">
+  <li class="{{#if checked}}checked{{/if}}">
+
+    <input type="checkbox" checked="{{checked}}" class="toggle-checked">
+
+    {{#if isOwner}}
+      <button class="toggle-private">
+        {{#if private}}
+            Private
+        {{else}}
+            Public
+        {{/if}}
+      </button>
+    {{/if}}
+  <span class="text"> {{title}}</span>
+  {{#if isOwner}}
+    <button class="delete">Remove</button>
+    {{/if}}
+  </li>
+
+</template>
